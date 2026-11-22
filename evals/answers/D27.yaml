@@ -1,0 +1,7 @@
+case_id: SYNTH-D27
+tests: second motion dated before the first motion
+expected:
+- hma13b.consistency:defect
+status: DEFECTS_FOUND
+issue_contains:
+- dated before the first motion

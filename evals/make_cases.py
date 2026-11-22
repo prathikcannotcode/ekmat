@@ -87,10 +87,10 @@ CASES = [
     ("C25", "no sources recorded", {"sources": {}}, [], [], {}),
     ("D01", "court district matches no s.19 ground", {"court_district": "Shahdara"}, [], [f"{J}:defect"], {}),
     ("D02", "no s.19 ground stated at all", {"marriage_district": None, "last_resided_together_district": None, "husband_residence_district": None, "wife_residence_district": None}, [], [f"{J}:defect"], {}),
-    ("D03", "separation under a year, s.14(1) application on file", {"separation_date": "2023-09-01", "s14_leave_application": True}, [], [f"{S}:warning"], {}),
+    ("D03", "separation under a year, s.14(1) application pleading exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [], [f"{S}:warning"], {}),
     ("D04", "separation under a year, no application", {"separation_date": "2023-09-01"}, [], [f"{S}:warning"], {}),
     ("D05", "filed within a year of marriage, no leave application", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01"}, [], [f"{M}:defect", f"{S}:warning"], {}),
-    ("D06", "filed within a year of marriage, leave application on file", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True}, [], [f"{M}:warning", f"{S}:warning"], {}),
+    ("D06", "filed within a year of marriage, leave application pleading exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [], [f"{M}:warning", f"{S}:warning"], {}),
     ("D07", "marriage proof missing", {}, [drop_docs("marriage_proof")], [f"{D}:defect"], {}),
     ("D08", "wife's affidavit and photographs missing", {}, [drop_docs("affidavit_wife", "photographs")], [f"{D}:defect"] * 2, {}),
     ("D09", "no documents at all", {"documents": []}, [], [f"{D}:defect"] * 7, {}),
@@ -110,7 +110,23 @@ CASES = [
     ("D23", "second motion early, waiver application on file", {"second_motion_date": "2024-10-01", "waiver_application_date": "2024-06-20"}, [], [f"{SM}:warning"], {}),
     ("D24", "second motion after eighteen months", {"second_motion_date": "2026-01-15"}, [], [f"{SM}:warning"], {}),
     ("D25", "waiver application within a week of first motion", {"waiver_application_date": "2024-06-12"}, [], [f"{WT}:warning"], {}),
+    ("D26", "separation dated after the first motion", {"separation_date": "2024-07-01"}, [], [f"{CO}:defect"], {}),
+    ("D27", "second motion dated before the first motion", {"second_motion_date": "2024-05-01"}, [], [f"{CO}:defect"], {}),
+    ("D28", "separation under a year, s.14(1) application pleads no exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True}, [], [f"{S}:warning"], {}),
+    ("D29", "filed within a year of marriage, leave application pleads no exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True}, [], [f"{M}:warning", f"{S}:warning"], {}),
 ]
+
+# Where the severity alone can't tell two messages apart, the answer key also names words the issue must contain.
+ISSUE_CONTAINS = {
+    "D03": ["and pleads exceptional hardship"],
+    "D04": ["No application under the proviso to s.14(1)"],
+    "D06": ["and pleads exceptional hardship"],
+    "D28": ["does not plead exceptional hardship"],
+    "D29": ["does not plead exceptional hardship"],
+    "D18": ["differently from the case file"],
+    "D26": ["after the first motion"],
+    "D27": ["dated before the first motion"],
+}
 
 
 def main() -> None:
@@ -129,6 +145,8 @@ def main() -> None:
                   "status": "DEFECTS_FOUND" if has_defect else "NO_DEFECTS_FOUND_IN_FILE"}
         if timeline:
             answer["timeline"] = timeline
+        if cid in ISSUE_CONTAINS:
+            answer["issue_contains"] = ISSUE_CONTAINS[cid]
         for sub, data in (("cases", case), ("answers", answer)):
             (ROOT / sub / f"{cid}.yaml").write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True), encoding="utf-8")
     print(f"wrote {len(CASES)} cases")

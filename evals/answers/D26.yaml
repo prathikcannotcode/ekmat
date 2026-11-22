@@ -1,0 +1,7 @@
+case_id: SYNTH-D26
+tests: separation dated after the first motion
+expected:
+- hma13b.consistency:defect
+status: DEFECTS_FOUND
+issue_contains:
+- after the first motion

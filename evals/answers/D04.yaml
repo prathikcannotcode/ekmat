@@ -3,3 +3,5 @@ tests: separation under a year, no application
 expected:
 - hma13b.separation_one_year:warning
 status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- No application under the proviso to s.14(1)

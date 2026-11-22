@@ -2,7 +2,7 @@
 
 Ekmat (एकमत, "of one mind") checks an Indian mutual consent divorce file before it reaches the judge, and leaves every decision with the judge.
 
-On 21 November 2026 a Supreme Court judge proposed 24/7 AI divorce courts for mutual consent cases. In the Mumbai Family Court study we used (cases filed 2010 to 2014), mutual consent cases closed in a median of one hearing and about 221 days. Most of those days were the statutory six-month wait, not time waiting for a judge. The Supreme Court can waive that wait under *Amardeep Singh v. Harveen Kaur* (2017), but family courts apply the waiver unevenly. Ekmat goes after that delay: it checks the file at filing and sets out the waiver facts for the court. It never says whether to grant anything.
+On 21 November 2026 a Supreme Court judge proposed 24/7 AI divorce courts for mutual consent cases. In the Mumbai Family Court study we used (cases filed 2010 to 2014), mutual consent cases closed in a median of one hearing and about 221 days. Most of those days were the statutory six-month wait, not time waiting for a judge. Since *Amardeep Singh v. Harveen Kaur* (Supreme Court, 2017), a family court can waive that wait, but family courts apply the waiver unevenly. Ekmat goes after that delay: it checks the file at filing and sets out the waiver facts for the court. It never says whether to grant anything.
 
 > Not legal advice. Not deployed in any court. Built to the permitted uses in the Supreme Court's Draft Regulations for Use of AI in Courts, 2026. Synthetic data only.
 
@@ -39,7 +39,7 @@ Start from [evals/cases/C01.yaml](evals/cases/C01.yaml) to see the case file for
 
 ## Evals
 
-There are 50 synthetic cases: 25 without defects and 25 with planted gaps. The answer keys were written by hand from the statute before the engine ran, so the eval tests the law rather than the engine's own output. [evals/make_cases.py](evals/make_cases.py) holds the table of cases and expected findings.
+There are 54 synthetic cases: 25 without defects and 29 with planted gaps. The answer keys were written by hand from the statute before the engine ran, so the eval tests the law rather than the engine's own output. [evals/make_cases.py](evals/make_cases.py) holds the table of cases and expected findings.
 
 ## Permitted uses under the draft regulations
 
@@ -53,9 +53,12 @@ There are 50 synthetic cases: 25 without defects and 25 with planted gaps. The a
 | Special Marriage Act s.28, Divorce Act s.10A, Hindi | M4 | |
 | Policy pack: registrar or legal-adviser route | M5 | Not a court tool |
 
-## Not yet verified
+## Verified, and not yet verified
 
-- The Delhi High Court Full Bench of 17 December 2025 (reported as 2025:DHC:11467-FB). The holding comes from news reports; nobody has read the paragraphs yet.
+The Delhi position comes from *Shiksha Kumari v. Santosh Kumar*, MAT.APP.(F.C.) 111/2025 (Full Bench, 17 December 2025). It was read against the court's own text, paras 41-44, 49 and 57.
+
+Not yet verified:
+
 - The document checklist, which hasn't been checked against the Delhi family courts' practice directions.
 - Reading s.19(ii) "respondent" as either spouse in a joint petition.
 

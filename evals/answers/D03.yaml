@@ -1,5 +1,7 @@
 case_id: SYNTH-D03
-tests: separation under a year, s.14(1) application on file
+tests: separation under a year, s.14(1) application pleading exceptional hardship
 expected:
 - hma13b.separation_one_year:warning
 status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- and pleads exceptional hardship

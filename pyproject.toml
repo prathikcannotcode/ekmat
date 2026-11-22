@@ -14,7 +14,7 @@ dev = ["pytest>=8"]
 ekmat = "ekmat.cli:main"
 
 [build-system]
-requires = ["setuptools>=69"]
+requires = ["setuptools>=77"]  # 77+ reads the SPDX licence string above
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]

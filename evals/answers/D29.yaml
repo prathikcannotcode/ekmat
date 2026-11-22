@@ -1,0 +1,8 @@
+case_id: SYNTH-D29
+tests: filed within a year of marriage, leave application pleads no exceptional hardship
+expected:
+- hma13b.marriage_one_year:warning
+- hma13b.separation_one_year:warning
+status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- does not plead exceptional hardship

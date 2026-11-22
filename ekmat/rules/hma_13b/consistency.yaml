@@ -6,9 +6,16 @@ messages:
   separation_before_marriage:
     on_fail: defect
     text: The separation date ({separation}) is before the marriage date ({marriage}).
+  separation_after_first_motion:
+    on_fail: defect
+    citation: Hindu Marriage Act 1955, s.13B(1)
+    text: The separation date ({separation}) is after the first motion ({first_motion}), so the petition cannot aver that the parties have been living separately.
+  second_before_first:
+    on_fail: defect
+    text: The second motion ({second_motion}) is dated before the first motion ({first_motion}).
   name_mismatch:
     on_fail: warning
-    text: The {document} spells the {spouse}'s name differently from the petition.
+    text: The {document} spells the {spouse}'s name differently from the case file.
   marriage_date_mismatch:
     on_fail: warning
     text: The {document} gives the marriage date as {found}; the case file has {expected}.

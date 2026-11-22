@@ -4,6 +4,7 @@ Legal text lives in rules/*.yaml. This module computes facts and picks which mes
 """
 
 import calendar
+import unicodedata
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Iterator, Literal, NamedTuple
@@ -62,24 +63,33 @@ def add_months(d: date, months: int) -> date:
 
 
 def _norm(s: str | None) -> str:
-    return "".join(ch for ch in (s or "").casefold() if ch.isalnum())
+    # keep letters, digits and combining marks, so Devanagari vowel signs still count
+    return "".join(ch for ch in unicodedata.normalize("NFC", (s or "").casefold())
+                   if unicodedata.category(ch)[0] in "LNM")
+
+
+def _s14(c: CaseFile, with_ground: str, without_ground: str, none: str) -> str:
+    """Which s.14(1) proviso message applies: the proviso needs exceptional hardship or depravity pleaded."""
+    if not c.s14_leave_application:
+        return none
+    return with_ground if c.exceptional_hardship_pleaded else without_ground
 
 
 # --- checks: one per rule id. Each yields the facts; the rule YAML supplies the words. ---
 
 def separation_one_year(c: CaseFile, r: Rule) -> Iterator[Hit]:
-    if not c.first_motion_date:
+    if not c.first_motion_date or c.separation_date > c.first_motion_date:  # the latter is a consistency defect
         return
     reached = add_months(c.separation_date, 12)
     if reached > c.first_motion_date:
-        key = "short_with_application" if c.s14_leave_application else "short_without_application"
+        key = _s14(c, "short_with_application", "short_application_without_ground", "short_without_application")
         yield Hit(key, dict(separation=c.separation_date, first_motion=c.first_motion_date, reached=reached),
                   ["separation_date", "first_motion_date"])
 
 
 def marriage_one_year(c: CaseFile, r: Rule) -> Iterator[Hit]:
     if c.first_motion_date and add_months(c.marriage_date, 12) > c.first_motion_date:
-        key = "within_year_with_leave" if c.s14_leave_application else "within_year_without_leave"
+        key = _s14(c, "within_year_with_leave", "within_year_leave_without_ground", "within_year_without_leave")
         yield Hit(key, dict(first_motion=c.first_motion_date, marriage=c.marriage_date),
                   ["marriage_date", "first_motion_date"])
 
@@ -98,7 +108,7 @@ def jurisdiction(c: CaseFile, r: Rule) -> Iterator[Hit]:
 
 def second_motion_window(c: CaseFile, r: Rule) -> Iterator[Hit]:
     fm, sm = c.first_motion_date, c.second_motion_date
-    if not (fm and sm):
+    if not (fm and sm) or sm < fm:  # a second motion before the first is a consistency defect
         return
     opens, closes = add_months(fm, 6), add_months(fm, 18)
     args = dict(first_motion=fm, second_motion=sm, opens=opens, closes=closes)
@@ -160,6 +170,13 @@ def consistency(c: CaseFile, r: Rule) -> Iterator[Hit]:
     if c.separation_date < c.marriage_date:
         yield Hit("separation_before_marriage", dict(separation=c.separation_date, marriage=c.marriage_date),
                   ["separation_date", "marriage_date"])
+    fm, sm = c.first_motion_date, c.second_motion_date
+    if fm and c.separation_date > fm:
+        yield Hit("separation_after_first_motion", dict(separation=c.separation_date, first_motion=fm),
+                  ["separation_date", "first_motion_date"])
+    if fm and sm and sm < fm:
+        yield Hit("second_before_first", dict(second_motion=sm, first_motion=fm),
+                  ["second_motion_date", "first_motion_date"])
     for d in c.documents:
         for spouse, expected, found in (("husband", c.husband_name, d.husband_name),
                                         ("wife", c.wife_name, d.wife_name)):

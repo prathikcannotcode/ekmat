@@ -5,7 +5,10 @@ condition: one year of living separately immediately before the first motion
 messages:
   short_with_application:
     on_fail: flag_waivable
-    text: Separation began {separation}; the first motion is dated {first_motion}. One year of separation is reached on {reached}, after the first motion. An application under the proviso to s.14(1) is on file.
+    text: Separation began {separation}; the first motion is dated {first_motion}. One year of separation is reached on {reached}, after the first motion. An application under the proviso to s.14(1) is on file and pleads exceptional hardship or exceptional depravity.
+  short_application_without_ground:
+    on_fail: flag_waivable
+    text: Separation began {separation}; the first motion is dated {first_motion}. One year of separation is reached on {reached}, after the first motion. An application under the proviso to s.14(1) is on file, but it does not plead exceptional hardship or exceptional depravity, which the proviso requires.
   short_without_application:
     on_fail: flag_waivable
     text: Separation began {separation}; the first motion is dated {first_motion}. One year of separation is reached on {reached}, after the first motion. No application under the proviso to s.14(1) is on file.

@@ -23,6 +23,12 @@ def test_add_months_is_calendar_arithmetic(start, months, end):
     assert add_months(start, months) == end
 
 
+def test_name_match_keeps_devanagari_vowel_signs():
+    from ekmat.engine import _norm
+    assert _norm("रव") != _norm("रवि")
+    assert _norm("RAVI  Example.") == _norm("ravi example")
+
+
 @pytest.mark.parametrize("text", [
     "The waiver should be granted.",
     "We recommend that the court proceed.",

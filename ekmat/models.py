@@ -67,7 +67,7 @@ class CaseFile(Strict):
     first_motion_date: date | None = None  # None: not filed yet; the report gives the dates to plan around
     second_motion_date: date | None = None
     s14_leave_application: bool = False  # application for leave under the proviso to s.14(1)
-    exceptional_hardship_pleaded: bool = False
+    exceptional_hardship_pleaded: bool = False  # the s.14(1) application pleads exceptional hardship or depravity
     waiver_application_date: date | None = None  # application to waive the s.13B(2) wait
 
     minor_children: int = 0

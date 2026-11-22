@@ -40,6 +40,8 @@ def run(root: Path) -> list[tuple[str, list[str]]]:
         diffs += [f"unexpected {k} x{n}" for k, n in (got - want).items()]
         if key.get("status") and key["status"] != report.status:
             diffs.append(f"status {report.status}, expected {key['status']}")
+        issues = " ".join(f.issue for f in report.findings)
+        diffs += [f"no issue contains {s!r}" for s in key.get("issue_contains") or [] if s not in issues]
         for k, v in (key.get("timeline") or {}).items():
             if str(report.timeline.get(k)) != str(v):
                 diffs.append(f"timeline.{k} {report.timeline.get(k)}, expected {v}")

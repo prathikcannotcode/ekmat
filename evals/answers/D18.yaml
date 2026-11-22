@@ -3,3 +3,5 @@ tests: wife's name spelt differently in her affidavit
 expected:
 - hma13b.consistency:warning
 status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- differently from the case file
