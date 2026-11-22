@@ -1,0 +1,5 @@
+case_id: SYNTH-C12
+tests: pending DV case with a plan
+expected:
+- hma13b.settlement:info
+status: NO_DEFECTS_FOUND_IN_FILE

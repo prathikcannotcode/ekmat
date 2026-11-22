@@ -1,0 +1,5 @@
+case_id: SYNTH-D10
+tests: affidavit dated after the first motion
+expected:
+- hma13b.documents:warning
+status: NO_DEFECTS_FOUND_IN_FILE

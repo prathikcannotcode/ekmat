@@ -1,0 +1,12 @@
+disclaimer: >-
+  Ekmat is case-preparation tooling, not legal advice and not a decision. It reports gaps visible in
+  the case file it was given and never says whether a decree, leave or waiver should follow. The
+  court decides. Have a qualified lawyer check every finding before relying on it.
+not_checked:
+  - Whether consent was obtained by force, fraud or undue influence (s.23(1)(bb)); that is for the court
+  - Whether the settlement is fair, and the welfare of any child; that is for the court
+  - Whether reconciliation is possible (s.23(2) HMA, s.9 Family Courts Act 1984); that is for the court and the mediator
+  - Whether either spouse still consents; either can withdraw until the decree
+  - Whether the documents are genuine; Ekmat reads the case file as entered and does not verify scans or identity
+  - Personal laws other than the Hindu Marriage Act, and courts outside Delhi
+  - Any judgment or practice direction after 22 November 2026

@@ -1,0 +1,9 @@
+id: hma13b.jurisdiction
+citation: Hindu Marriage Act 1955, s.19
+verified: false
+note: Reads the respondent's residence in s.19(ii) as either spouse's residence, because both spouses petition jointly under s.13B. That reading is unconfirmed.
+condition: the court's district matches the place of marriage, the place the parties last resided together, or a spouse's residence
+messages:
+  no_ground:
+    on_fail: defect
+    text: The court district is {court}. No s.19 ground on file points there (marriage {marriage}; last resided together {together}; husband resides {husband}; wife resides {wife}).

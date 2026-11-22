@@ -1,0 +1,7 @@
+case_id: SYNTH-C14
+tests: waiver application exactly one week after first motion
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE
+timeline:
+  waiver_application_from: '2024-06-17'
+  eighteen_months_of_separation: '2023-07-01'

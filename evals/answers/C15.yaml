@@ -1,0 +1,6 @@
+case_id: SYNTH-C15
+tests: first motion not yet filed
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE
+timeline:
+  earliest_first_motion_without_leave: '2024-03-01'

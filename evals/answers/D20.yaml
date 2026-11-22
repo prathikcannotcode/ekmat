@@ -1,0 +1,5 @@
+case_id: SYNTH-D20
+tests: husband's affidavit gives another separation date
+expected:
+- hma13b.consistency:warning
+status: NO_DEFECTS_FOUND_IN_FILE

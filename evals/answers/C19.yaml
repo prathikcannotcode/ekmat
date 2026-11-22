@@ -1,0 +1,6 @@
+case_id: SYNTH-C19
+tests: six months from 31 August in a leap year ends on 29 February
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE
+timeline:
+  second_motion_opens: '2024-02-29'

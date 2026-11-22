@@ -1,0 +1,7 @@
+case_id: SYNTH-D13
+tests: one child, no child terms
+expected:
+- hma13b.settlement:warning
+- hma13b.settlement:warning
+- hma13b.settlement:warning
+status: NO_DEFECTS_FOUND_IN_FILE

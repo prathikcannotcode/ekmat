@@ -1,0 +1,6 @@
+case_id: SYNTH-D15
+tests: 498A pending, no plan
+expected:
+- hma13b.settlement:warning
+- hma13b.settlement:info
+status: NO_DEFECTS_FOUND_IN_FILE

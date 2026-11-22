@@ -1,0 +1,17 @@
+id: hma13b.consistency
+citation: Hindu Marriage Act 1955, s.13B(2)
+verified: true
+condition: the court is satisfied that the marriage was solemnised and the averments in the petition are true
+messages:
+  separation_before_marriage:
+    on_fail: defect
+    text: The separation date ({separation}) is before the marriage date ({marriage}).
+  name_mismatch:
+    on_fail: warning
+    text: The {document} spells the {spouse}'s name differently from the petition.
+  marriage_date_mismatch:
+    on_fail: warning
+    text: The {document} gives the marriage date as {found}; the case file has {expected}.
+  separation_date_mismatch:
+    on_fail: warning
+    text: The {document} gives the separation date as {found}; the case file has {expected}.

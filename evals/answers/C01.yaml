@@ -1,0 +1,4 @@
+case_id: SYNTH-C01
+tests: clean base case
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

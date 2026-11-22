@@ -1,0 +1,5 @@
+case_id: SYNTH-D22
+tests: second motion early, no waiver application
+expected:
+- hma13b.second_motion_window:warning
+status: NO_DEFECTS_FOUND_IN_FILE

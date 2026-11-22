@@ -1,0 +1,4 @@
+case_id: SYNTH-C04
+tests: jurisdiction from the husband's residence only
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

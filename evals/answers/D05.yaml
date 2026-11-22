@@ -1,0 +1,6 @@
+case_id: SYNTH-D05
+tests: filed within a year of marriage, no leave application
+expected:
+- hma13b.marriage_one_year:defect
+- hma13b.separation_one_year:warning
+status: DEFECTS_FOUND

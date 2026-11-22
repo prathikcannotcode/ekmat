@@ -1,0 +1,4 @@
+case_id: SYNTH-C05
+tests: jurisdiction from the place of marriage only
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

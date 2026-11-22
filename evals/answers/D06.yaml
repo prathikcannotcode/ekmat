@@ -1,0 +1,6 @@
+case_id: SYNTH-D06
+tests: filed within a year of marriage, leave application on file
+expected:
+- hma13b.marriage_one_year:warning
+- hma13b.separation_one_year:warning
+status: NO_DEFECTS_FOUND_IN_FILE

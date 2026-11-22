@@ -1,0 +1,5 @@
+case_id: SYNTH-D24
+tests: second motion after eighteen months
+expected:
+- hma13b.second_motion_window:warning
+status: NO_DEFECTS_FOUND_IN_FILE

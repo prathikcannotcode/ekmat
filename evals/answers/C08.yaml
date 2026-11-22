@@ -1,0 +1,7 @@
+case_id: SYNTH-C08
+tests: second motion on the day the window opens
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE
+timeline:
+  second_motion_opens: '2024-12-10'
+  second_motion_closes: '2025-12-10'

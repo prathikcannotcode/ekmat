@@ -1,0 +1,33 @@
+id: hma13b.settlement
+citation: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
+verified: true
+condition: the terms settle alimony, custody and every other pending issue between the parties
+messages:
+  maintenance_missing:
+    on_fail: warning
+    text: The settlement does not record maintenance or permanent alimony, or an express waiver of it.
+  stridhan_missing:
+    on_fail: warning
+    text: The settlement does not record whether the stridhan has been returned or is with the wife. Stridhan is her property; the terms should confirm where it is, not divide it.
+  property_missing:
+    on_fail: warning
+    text: The settlement does not say how jointly held property is dealt with, or that there is none.
+  child_head_missing:
+    on_fail: warning
+    citation: Hindu Marriage Act 1955, s.26
+    text: "{children} minor child(ren) on file, but the settlement does not cover {head}."
+  pending_plan_missing:
+    on_fail: warning
+    text: Cases between the parties are pending, but the settlement has no plan for them.
+  non_compoundable:
+    on_fail: info
+    citation: Indian Penal Code 1860, s.498A; Bharatiya Nyaya Sanhita 2023, s.85
+    text: A case under s.498A IPC (s.85 BNS) is pending. The offence is non-compoundable, so ending it on settlement needs a High Court quashing order.
+  withdrawable:
+    on_fail: info
+    citation: Protection of Women from Domestic Violence Act 2005; CrPC 1973, s.125; BNSS 2023, s.144
+    text: A {kind} case is pending. It can be withdrawn on settlement; the terms should say when.
+  child_inconsistent:
+    on_fail: warning
+    citation: Hindu Marriage Act 1955, s.26
+    text: No minor children are on file, but a pending case involves a child.

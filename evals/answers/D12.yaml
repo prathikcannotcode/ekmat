@@ -1,0 +1,5 @@
+case_id: SYNTH-D12
+tests: stridhan not addressed
+expected:
+- hma13b.settlement:warning
+status: NO_DEFECTS_FOUND_IN_FILE

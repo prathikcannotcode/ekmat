@@ -1,0 +1,4 @@
+case_id: SYNTH-C23
+tests: never referred to mediation (not a scrutiny defect)
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

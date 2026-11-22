@@ -1,0 +1,4 @@
+case_id: SYNTH-C02
+tests: jurisdiction from where they last lived together
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

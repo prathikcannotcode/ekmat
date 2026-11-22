@@ -1,0 +1,20 @@
+id: hma13b.documents
+citation: Hindu Marriage Act 1955, s.20
+verified: false
+note: The required list has not been checked against the Delhi family courts' practice directions. Treat it as a minimum, not the full list.
+condition: the first motion carries the documents the court needs to verify the petition
+required_documents:
+  - joint_petition
+  - affidavit_husband
+  - affidavit_wife
+  - marriage_proof
+  - address_proof_husband
+  - address_proof_wife
+  - photographs
+messages:
+  missing:
+    on_fail: defect
+    text: "No {document} found in the file."
+  dated_after_filing:
+    on_fail: warning
+    text: The {document} is dated {dated}, after the first motion ({first_motion}).

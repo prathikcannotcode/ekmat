@@ -1,0 +1,45 @@
+case_id: SYNTH-C22
+schema_version: 1
+jurisdiction: delhi
+court_district: south
+husband_name: Ravi Example
+wife_name: Meera Example
+marriage_date: '2019-02-14'
+marriage_district: South
+separation_date: '2023-03-01'
+last_resided_together_district: South
+husband_residence_district: New Delhi
+wife_residence_district: South
+first_motion_date: '2024-06-10'
+minor_children: 0
+settlement:
+  maintenance: true
+  stridhan: returned
+  property: true
+mediation:
+  referred: true
+  outcome: failed
+documents:
+- kind: joint_petition
+  dated: '2024-06-01'
+  husband_name: Ravi Example
+  wife_name: Meera Example
+- kind: affidavit_husband
+  dated: '2024-06-01'
+- kind: affidavit_wife
+  dated: '2024-06-01'
+- kind: marriage_proof
+  dated: '2024-06-01'
+- kind: address_proof_husband
+  dated: '2024-06-01'
+- kind: address_proof_wife
+  dated: '2024-06-01'
+- kind: photographs
+  dated: '2024-06-01'
+sources:
+  marriage_date:
+    document: marriage_proof
+    page: 1
+  separation_date:
+    document: joint_petition
+    page: 3

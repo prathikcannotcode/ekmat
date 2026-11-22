@@ -1,0 +1,5 @@
+case_id: SYNTH-D18
+tests: wife's name spelt differently in her affidavit
+expected:
+- hma13b.consistency:warning
+status: NO_DEFECTS_FOUND_IN_FILE

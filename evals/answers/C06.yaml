@@ -1,0 +1,4 @@
+case_id: SYNTH-C06
+tests: one child, every child term settled
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE

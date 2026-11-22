@@ -1,0 +1,5 @@
+case_id: SYNTH-D04
+tests: separation under a year, no application
+expected:
+- hma13b.separation_one_year:warning
+status: NO_DEFECTS_FOUND_IN_FILE

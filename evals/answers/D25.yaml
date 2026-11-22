@@ -1,0 +1,5 @@
+case_id: SYNTH-D25
+tests: waiver application within a week of first motion
+expected:
+- hma13b.waiver_application_timing:warning
+status: NO_DEFECTS_FOUND_IN_FILE

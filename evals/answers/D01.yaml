@@ -1,0 +1,5 @@
+case_id: SYNTH-D01
+tests: court district matches no s.19 ground
+expected:
+- hma13b.jurisdiction:defect
+status: DEFECTS_FOUND

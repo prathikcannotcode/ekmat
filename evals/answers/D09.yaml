@@ -1,0 +1,11 @@
+case_id: SYNTH-D09
+tests: no documents at all
+expected:
+- hma13b.documents:defect
+- hma13b.documents:defect
+- hma13b.documents:defect
+- hma13b.documents:defect
+- hma13b.documents:defect
+- hma13b.documents:defect
+- hma13b.documents:defect
+status: DEFECTS_FOUND

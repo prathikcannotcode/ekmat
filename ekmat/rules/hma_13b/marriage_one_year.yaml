@@ -1,0 +1,11 @@
+id: hma13b.marriage_one_year
+citation: Hindu Marriage Act 1955, s.14(1)
+verified: true
+condition: no petition for divorce within one year of the marriage, unless the court gives leave on an application under the proviso
+messages:
+  within_year_with_leave:
+    on_fail: flag_requires_leave
+    text: The first motion ({first_motion}) is within one year of the marriage ({marriage}). An application for leave under the proviso to s.14(1) is on file.
+  within_year_without_leave:
+    on_fail: defect
+    text: The first motion ({first_motion}) is within one year of the marriage ({marriage}), and no application for leave under the proviso to s.14(1) is on file. s.14(1) bars the court from entertaining the petition without leave.

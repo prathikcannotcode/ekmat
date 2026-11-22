@@ -1,0 +1,6 @@
+case_id: SYNTH-D17
+tests: no children on file, but a DV case involves a child
+expected:
+- hma13b.settlement:info
+- hma13b.settlement:warning
+status: NO_DEFECTS_FOUND_IN_FILE

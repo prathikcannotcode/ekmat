@@ -1,0 +1,6 @@
+case_id: SYNTH-C18
+tests: six months from 31 August ends on 28 February
+expected: []
+status: NO_DEFECTS_FOUND_IN_FILE
+timeline:
+  second_motion_opens: '2025-02-28'

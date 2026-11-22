@@ -1,0 +1,8 @@
+id: hma13b.waiver_application_timing
+citation: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
+verified: true
+condition: an application to waive the s.13B(2) period can be filed one week after the first motion
+messages:
+  too_early:
+    on_fail: warning
+    text: The waiver application ({applied}) is dated before {opens}, one week after the first motion ({first_motion}).

@@ -1,0 +1,13 @@
+jurisdiction: delhi
+overrides:
+  hma13b.separation_one_year:
+    waiver_route: Proviso to s.14(1) HMA, per the Delhi High Court Full Bench, 17 December 2025, 2025:DHC:11467-FB (MAT.APP.(F.C.) 111/2025)
+    verified: false
+    note: The Full Bench citation comes from news reports and the court's file name. Its paragraphs have not been read. The proviso needs exceptional hardship to the petitioner or exceptional depravity of the respondent, and the Bench warned against routine use.
+local_position: >-
+  The Delhi High Court Full Bench (17 December 2025, reported as 2025:DHC:11467-FB) held that the
+  one-year separation in s.13B(1) is directory and can be waived through the proviso to s.14(1),
+  which requires exceptional hardship or exceptional depravity. Waiving it does not rule out a
+  separate waiver of the six-month period in s.13B(2) under Amardeep Singh. The Bench cautioned
+  against routine use. Family courts and the High Court can both decide the waiver.
+local_position_verified: false

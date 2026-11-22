@@ -1,0 +1,5 @@
+case_id: SYNTH-D07
+tests: marriage proof missing
+expected:
+- hma13b.documents:defect
+status: DEFECTS_FOUND

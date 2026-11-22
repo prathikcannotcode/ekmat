@@ -1,0 +1,15 @@
+id: hma13b.second_motion_window
+citation: Hindu Marriage Act 1955, s.13B(2)
+verified: true
+condition: second motion not earlier than six months and not later than eighteen months after the first motion
+waiver_route: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
+messages:
+  early_with_application:
+    on_fail: flag_waivable
+    text: The second motion ({second_motion}) is before {opens}, six months after the first motion ({first_motion}). An application to waive the waiting period is on file.
+  early_without_application:
+    on_fail: flag_waivable
+    text: The second motion ({second_motion}) is before {opens}, six months after the first motion ({first_motion}). No application to waive the waiting period is on file.
+  late:
+    on_fail: flag_lapsed
+    text: The second motion ({second_motion}) is after {closes}, eighteen months after the first motion ({first_motion}). The petition may need to be filed afresh.
