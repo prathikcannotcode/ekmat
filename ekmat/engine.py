@@ -40,6 +40,8 @@ class Rule(Strict):
     valid_from: date | None = None
     waiver_route: str | None = None
     required_documents: list[str] = []
+    practice_documents: list[str] = []
+    known_documents: list[str] = []
     messages: dict[str, Message]
 
 
@@ -55,8 +57,12 @@ def load_yaml(path: Path) -> dict:
 
 
 def add_months(d: date, months: int) -> date:
-    """Calendar months, clamped to month end: 31 Aug + 6 months = 28 or 29 Feb."""
-    # shortcut: 29 Feb + 12 months gives 28 Feb; if a court counts it as 1 March, change the clamp here.
+    """Calendar months (s.3(35) General Clauses Act: the British, i.e. Gregorian, calendar).
+
+    The period ends on the corresponding date; with no corresponding date it ends on the month's last day,
+    so 31 Aug + 6 months = 28 or 29 Feb. Filing on the end date counts: s.9 excludes the first day.
+    """
+    # shortcut: 29 Feb + 12 months gives 28 Feb; no Indian ruling on leap-day starts has been read. If one says 1 March, change the clamp here.
     y, m = divmod(d.month - 1 + months, 12)
     y, m = d.year + y, m + 1
     return date(y, m, min(d.day, calendar.monthrange(y, m)[1]))
@@ -132,6 +138,14 @@ def documents(c: CaseFile, r: Rule) -> Iterator[Hit]:
     for need in r.required_documents:
         if need not in kinds:
             yield Hit("missing", dict(document=need), ["documents"], need)
+    if c.s14_leave_application and "s14_affidavit" not in kinds:
+        yield Hit("missing_s14_affidavit", {}, ["s14_leave_application", "documents"], "s14_affidavit")
+    for need in r.practice_documents:
+        if need not in kinds:
+            yield Hit("practice_missing", dict(document=need), ["documents"], need)
+    known = {*r.required_documents, *r.practice_documents, *r.known_documents}
+    for kind in sorted(kinds - known):
+        yield Hit("unknown_kind", dict(document=kind), ["documents"], kind)
     for d in c.documents:
         if d.kind in r.required_documents and d.dated and c.first_motion_date and d.dated > c.first_motion_date:
             yield Hit("dated_after_filing", dict(document=d.kind, dated=d.dated, first_motion=c.first_motion_date),

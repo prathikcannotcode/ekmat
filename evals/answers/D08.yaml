@@ -2,5 +2,5 @@ case_id: SYNTH-D08
 tests: wife's affidavit and photographs missing
 expected:
 - hma13b.documents:defect
-- hma13b.documents:defect
+- hma13b.documents:info
 status: DEFECTS_FOUND

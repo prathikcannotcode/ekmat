@@ -1,7 +1,13 @@
 id: hma13b.jurisdiction
 citation: Hindu Marriage Act 1955, s.19
 verified: false
-note: Reads the respondent's residence in s.19(ii) as either spouse's residence, because both spouses petition jointly under s.13B. That reading is unconfirmed.
+note: >-
+  s.19's text was checked as quoted in Poonam v. State (NCT of Delhi), MAT.APP.(F.C.) 285/2026, Delhi
+  High Court, 7 September 2026, para 10. That judgment holds that under s.19(iii) the last place of joint
+  residence decides, not any earlier one (paras 13-14). Unconfirmed: a joint s.13B petition has no
+  respondent, and Ekmat reads s.19(ii) as either spouse's residence. APS v. Nil, 2026 LiveLaw (Mad) 432
+  (Madras High Court) is reported to have held that a joint petition filed where the husband lives must be
+  entertained. That is persuasive, not binding in Delhi, and its text has not been read.
 condition: the court's district matches the place of marriage, the place the parties last resided together, or a spouse's residence
 messages:
   no_ground:

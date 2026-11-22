@@ -36,6 +36,8 @@ documents:
   dated: '2024-06-01'
 - kind: photographs
   dated: '2024-06-01'
+- kind: s14_affidavit
+  dated: '2024-06-01'
 sources:
   marriage_date:
     document: marriage_proof

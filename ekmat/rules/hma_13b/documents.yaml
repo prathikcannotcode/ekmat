@@ -1,20 +1,41 @@
 id: hma13b.documents
-citation: Hindu Marriage Act 1955, s.20
+citation: Hindu Marriage Rules 1979 (Delhi High Court), r.4(a), r.8 and Form G
 verified: false
-note: The required list has not been checked against the Delhi family courts' practice directions. Treat it as a minimum, not the full list.
-condition: the first motion carries the documents the court needs to verify the petition
+note: The Delhi rules were read from a secondary reproduction (divorcelawyerindia.com, headed "Delhi High Court Hindu Marriage Rules, 1979", Delhi Gazette No.262/Gazette OSD (R), 16 October 1979), not from the Gazette itself. Registries may ask for more than the rules require.
+condition: the first motion carries the documents the Delhi rules require
+# Required by the rules: the Form G joint petition, proof of marriage (r.4(a): a certified extract from the
+# Hindu Marriage Register, or an affidavit of the marriage), and each spouse's affidavit of non-collusion (r.8).
 required_documents:
   - joint_petition
+  - marriage_proof
   - affidavit_husband
   - affidavit_wife
-  - marriage_proof
+# Not in the rules, but commonly asked for by registries. Missing ones are reported as info.
+practice_documents:
   - address_proof_husband
   - address_proof_wife
   - photographs
+# Other kinds Ekmat recognises. Anything else is reported, in case it is a misspelling.
+known_documents:
+  - s14_affidavit
+  - waiver_application
+  - settlement_deed
+  - mediation_report
+  - other
 messages:
   missing:
     on_fail: defect
     text: "No {document} found in the file."
+  missing_s14_affidavit:
+    on_fail: defect
+    citation: Hindu Marriage Rules 1979 (Delhi High Court), r.13(1) and r.13(4)
+    text: An application under the proviso to s.14(1) is marked on file, but there is no s14_affidavit. Rule 13 requires the application by affidavit, stating the exceptional hardship or depravity, and filed with the intended petition.
+  practice_missing:
+    on_fail: info
+    text: "No {document} found. The 1979 rules don't require it, but registries commonly ask for it."
+  unknown_kind:
+    on_fail: warning
+    text: "The file lists a document of kind {document}, which Ekmat doesn't recognise. Check the spelling against the kinds in documents.yaml."
   dated_after_filing:
     on_fail: warning
     text: The {document} is dated {dated}, after the first motion ({first_motion}).

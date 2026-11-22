@@ -5,7 +5,7 @@ expected:
 - hma13b.documents:defect
 - hma13b.documents:defect
 - hma13b.documents:defect
-- hma13b.documents:defect
-- hma13b.documents:defect
-- hma13b.documents:defect
+- hma13b.documents:info
+- hma13b.documents:info
+- hma13b.documents:info
 status: DEFECTS_FOUND

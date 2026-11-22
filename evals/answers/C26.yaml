@@ -1,0 +1,7 @@
+case_id: SYNTH-C26
+tests: photographs not filed (not required by the 1979 rules)
+expected:
+- hma13b.documents:info
+status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- No photographs found

@@ -1,0 +1,8 @@
+case_id: SYNTH-D30
+tests: s.14(1) application marked, but no affidavit under rule 13
+expected:
+- hma13b.separation_one_year:warning
+- hma13b.documents:defect
+status: DEFECTS_FOUND
+issue_contains:
+- Rule 13 requires the application by affidavit

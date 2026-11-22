@@ -39,7 +39,7 @@ Start from [evals/cases/C01.yaml](evals/cases/C01.yaml) to see the case file for
 
 ## Evals
 
-There are 54 synthetic cases: 25 without defects and 29 with planted gaps. The answer keys were written by hand from the statute before the engine ran, so the eval tests the law rather than the engine's own output. [evals/make_cases.py](evals/make_cases.py) holds the table of cases and expected findings.
+There are 57 synthetic cases: 26 without defects and 31 with planted gaps. The answer keys were written by hand from the statute before the engine ran, so the eval tests the law rather than the engine's own output. [evals/make_cases.py](evals/make_cases.py) holds the table of cases and expected findings.
 
 ## Permitted uses under the draft regulations
 
@@ -55,12 +55,16 @@ There are 54 synthetic cases: 25 without defects and 29 with planted gaps. The a
 
 ## Verified, and not yet verified
 
-The Delhi position comes from *Shiksha Kumari v. Santosh Kumar*, MAT.APP.(F.C.) 111/2025 (Full Bench, 17 December 2025). It was read against the court's own text, paras 41-44, 49 and 57.
+Checked against the court's own text:
+
+- The Delhi waiver position: *Shiksha Kumari v. Santosh Kumar*, MAT.APP.(F.C.) 111/2025 (Full Bench, 17 December 2025), paras 41-44, 49 and 57.
+- s.19 and the last-residence rule: *Poonam v. State (NCT of Delhi)*, MAT.APP.(F.C.) 285/2026 (7 September 2026), paras 10 and 13-14.
 
 Not yet verified:
 
-- The document checklist, which hasn't been checked against the Delhi family courts' practice directions.
-- Reading s.19(ii) "respondent" as either spouse in a joint petition.
+- **Documents.** The checklist follows the Hindu Marriage Rules 1979 (Delhi High Court): proof of marriage (r.4(a)), each spouse's non-collusion affidavit (r.8), and the r.13 affidavit for a s.14 application. It's read from a secondary reproduction, not the Delhi Gazette. Address proofs and photographs aren't in the rules, so a missing one is reported as info.
+- **s.19 for a joint petition.** Reading s.19(ii) "respondent" as either spouse. *APS v. Nil*, 2026 LiveLaw (Mad) 432 is reported to support it. That's persuasive and unread, and no Delhi ruling was found.
+- **Leap-day starts.** 29 February plus a year is treated as 28 February, under the corresponding-date rule. No Indian ruling on leap-day starts has been read.
 
 The research behind the design is in [docs/research.md](docs/research.md). [docs/spec-review.md](docs/spec-review.md) records where we departed from the first spec.
 

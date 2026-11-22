@@ -42,6 +42,10 @@ def drop_docs(*kinds):
     return lambda c: c.update(documents=[d for d in c["documents"] if d["kind"] not in kinds])
 
 
+def add_doc(kind):
+    return lambda c: c["documents"].append({"kind": kind, "dated": "2024-06-01"})
+
+
 def doc(kind, **fields):
     return lambda c: next(d for d in c["documents"] if d["kind"] == kind).update(fields)
 
@@ -85,15 +89,16 @@ CASES = [
     ("C23", "never referred to mediation (not a scrutiny defect)", {"mediation": {"referred": False, "outcome": None}}, [], [], {}),
     ("C24", "waiver application filed, second motion within the window anyway", {"waiver_application_date": "2024-06-20", "second_motion_date": "2025-01-10"}, [], [], {}),
     ("C25", "no sources recorded", {"sources": {}}, [], [], {}),
+    ("C26", "photographs not filed (not required by the 1979 rules)", {}, [drop_docs("photographs")], [f"{D}:info"], {}),
     ("D01", "court district matches no s.19 ground", {"court_district": "Shahdara"}, [], [f"{J}:defect"], {}),
     ("D02", "no s.19 ground stated at all", {"marriage_district": None, "last_resided_together_district": None, "husband_residence_district": None, "wife_residence_district": None}, [], [f"{J}:defect"], {}),
-    ("D03", "separation under a year, s.14(1) application pleading exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [], [f"{S}:warning"], {}),
+    ("D03", "separation under a year, s.14(1) application pleading exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [add_doc("s14_affidavit")], [f"{S}:warning"], {}),
     ("D04", "separation under a year, no application", {"separation_date": "2023-09-01"}, [], [f"{S}:warning"], {}),
     ("D05", "filed within a year of marriage, no leave application", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01"}, [], [f"{M}:defect", f"{S}:warning"], {}),
-    ("D06", "filed within a year of marriage, leave application pleading exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [], [f"{M}:warning", f"{S}:warning"], {}),
+    ("D06", "filed within a year of marriage, leave application pleading exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [add_doc("s14_affidavit")], [f"{M}:warning", f"{S}:warning"], {}),
     ("D07", "marriage proof missing", {}, [drop_docs("marriage_proof")], [f"{D}:defect"], {}),
-    ("D08", "wife's affidavit and photographs missing", {}, [drop_docs("affidavit_wife", "photographs")], [f"{D}:defect"] * 2, {}),
-    ("D09", "no documents at all", {"documents": []}, [], [f"{D}:defect"] * 7, {}),
+    ("D08", "wife's affidavit and photographs missing", {}, [drop_docs("affidavit_wife", "photographs")], [f"{D}:defect", f"{D}:info"], {}),
+    ("D09", "no documents at all", {"documents": []}, [], [f"{D}:defect"] * 4 + [f"{D}:info"] * 3, {}),
     ("D10", "affidavit dated after the first motion", {}, [doc("affidavit_husband", dated="2024-07-01")], [f"{D}:warning"], {}),
     ("D11", "maintenance not addressed", {"settlement": {"maintenance": False}}, [], [f"{W}:warning"], {}),
     ("D12", "stridhan not addressed", {"settlement": {"stridhan": "not_addressed"}}, [], [f"{W}:warning"], {}),
@@ -112,8 +117,10 @@ CASES = [
     ("D25", "waiver application within a week of first motion", {"waiver_application_date": "2024-06-12"}, [], [f"{WT}:warning"], {}),
     ("D26", "separation dated after the first motion", {"separation_date": "2024-07-01"}, [], [f"{CO}:defect"], {}),
     ("D27", "second motion dated before the first motion", {"second_motion_date": "2024-05-01"}, [], [f"{CO}:defect"], {}),
-    ("D28", "separation under a year, s.14(1) application pleads no exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True}, [], [f"{S}:warning"], {}),
-    ("D29", "filed within a year of marriage, leave application pleads no exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True}, [], [f"{M}:warning", f"{S}:warning"], {}),
+    ("D28", "separation under a year, s.14(1) application pleads no exceptional hardship", {"separation_date": "2023-09-01", "s14_leave_application": True}, [add_doc("s14_affidavit")], [f"{S}:warning"], {}),
+    ("D29", "filed within a year of marriage, leave application pleads no exceptional hardship", {"marriage_date": "2023-09-01", "separation_date": "2023-10-01", "s14_leave_application": True}, [add_doc("s14_affidavit")], [f"{M}:warning", f"{S}:warning"], {}),
+    ("D30", "s.14(1) application marked, but no affidavit under rule 13", {"separation_date": "2023-09-01", "s14_leave_application": True, "exceptional_hardship_pleaded": True}, [], [f"{S}:warning", f"{D}:defect"], {}),
+    ("D31", "document kind misspelt", {}, [add_doc("marriage_certificate")], [f"{D}:warning"], {}),
 ]
 
 # Where the severity alone can't tell two messages apart, the answer key also names words the issue must contain.
@@ -126,6 +133,9 @@ ISSUE_CONTAINS = {
     "D18": ["differently from the case file"],
     "D26": ["after the first motion"],
     "D27": ["dated before the first motion"],
+    "D30": ["Rule 13 requires the application by affidavit"],
+    "D31": ["marriage_certificate, which Ekmat doesn't recognise"],
+    "C26": ["No photographs found"],
 }
 
 

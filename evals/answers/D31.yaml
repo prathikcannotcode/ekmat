@@ -1,0 +1,7 @@
+case_id: SYNTH-D31
+tests: document kind misspelt
+expected:
+- hma13b.documents:warning
+status: NO_DEFECTS_FOUND_IN_FILE
+issue_contains:
+- marriage_certificate, which Ekmat doesn't recognise
