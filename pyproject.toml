@@ -7,6 +7,9 @@ license = "Apache-2.0"
 requires-python = ">=3.12"
 dependencies = ["pydantic>=2.6", "pyyaml>=6.0"]
 
+[project.urls]
+Repository = "https://github.com/prathikcannotcode/ekmat"
+
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 
