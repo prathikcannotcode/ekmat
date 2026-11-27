@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from ekmat.cli import main
+from ekmat import engine
+from ekmat.cli import _load_case, main
 from ekmat.engine import RULES_DIR, add_months
 from ekmat.evaluate import RECOMMENDATION, run
 
@@ -66,6 +67,34 @@ def test_guard_misses_paraphrase(text):
 def test_rule_text_carries_no_recommendation():
     for path in RULES_DIR.rglob("*.yaml"):
         assert not RECOMMENDATION.search(path.read_text(encoding="utf-8")), path.name
+
+
+def test_period_comes_from_the_rule_file(monkeypatch):
+    case = _load_case(str(EVALS / "cases" / "C16.yaml"))  # separation exactly one year before the first motion
+    hits = lambda: [f for f in engine.scrutinise(case).findings if f.rule_id == "hma13b.separation_one_year"]
+    assert not hits()
+    real = engine.load_rules
+
+    def two_years(jurisdiction="delhi"):
+        rules, local = real(jurisdiction)
+        rules["hma13b.separation_one_year"].period["months"] = 24
+        return rules, local
+
+    monkeypatch.setattr(engine, "load_rules", two_years)
+    assert hits()
+
+
+# The message text spells periods out in words. If you change a period, this fails until the wording follows.
+PERIOD_WORDS = {("months", 6): "six months", ("months", 12): "one year", ("months", 18): "eighteen months",
+                ("days", 7): "one week"}
+
+
+def test_summary_names_each_period():
+    rules, _ = engine.load_rules()
+    for r in rules.values():
+        for key, n in r.period.items():
+            words = PERIOD_WORDS.get(("days" if key.endswith("days") else "months", n))
+            assert words and words in r.summary.lower(), f"{r.id}: {key}={n} not named in its summary"
 
 
 def test_all_cases_match_answer_keys():

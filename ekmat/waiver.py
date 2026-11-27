@@ -1,7 +1,7 @@
 """Amardeep Singh waiver brief: the facts on file for each condition. It never grades a condition."""
 
 from . import __version__
-from .engine import RULES_DIR, add_months, load_rules, load_yaml
+from .engine import RULES_DIR, load_rules, load_yaml
 from .models import CaseFile, Report, WaiverBrief, WaiverCondition
 
 SETTLEMENT_HEADS = ["maintenance", "property", "custody", "visitation", "child_support", "pending_cases_plan"]
@@ -11,7 +11,7 @@ def build_brief(case: CaseFile, report: Report) -> WaiverBrief:
     w = load_yaml(RULES_DIR / "waiver" / "amardeep.yaml")
     _, local = load_rules(case.jurisdiction)
     fm, sep = case.first_motion_date, case.separation_date
-    sep18 = add_months(sep, 18)
+    sep18 = report.timeline["eighteen_months_of_separation"]
 
     a_on = [f"Separation began {sep}.", f"Eighteen months of separation were reached on {sep18}."]
     if fm:

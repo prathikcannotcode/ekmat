@@ -2,6 +2,7 @@ id: hma13b.waiver_application_timing
 citation: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
 verified: true
 summary: an application to waive the s.13B(2) period can be filed one week after the first motion
+period: {days: 7}
 messages:
   too_early:
     on_fail: warning

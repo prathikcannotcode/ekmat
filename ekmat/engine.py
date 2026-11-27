@@ -36,6 +36,7 @@ class Rule(Strict):
     citation: str
     verified: bool
     summary: str  # a plain-language label; the logic is the check function in CHECKS
+    period: dict[str, int] = {}  # the time limits the check computes with, e.g. {months: 12}
     note: str | None = None
     valid_from: date | None = None
     waiver_route: str | None = None
@@ -86,7 +87,7 @@ def _s14(c: CaseFile, with_ground: str, without_ground: str, none: str) -> str:
 def separation_one_year(c: CaseFile, r: Rule) -> Iterator[Hit]:
     if not c.first_motion_date or c.separation_date > c.first_motion_date:  # the latter is a consistency defect
         return
-    reached = add_months(c.separation_date, 12)
+    reached = add_months(c.separation_date, r.period["months"])
     if reached > c.first_motion_date:
         key = _s14(c, "short_with_application", "short_application_without_ground", "short_without_application")
         yield Hit(key, dict(separation=c.separation_date, first_motion=c.first_motion_date, reached=reached),
@@ -94,7 +95,7 @@ def separation_one_year(c: CaseFile, r: Rule) -> Iterator[Hit]:
 
 
 def marriage_one_year(c: CaseFile, r: Rule) -> Iterator[Hit]:
-    if c.first_motion_date and add_months(c.marriage_date, 12) > c.first_motion_date:
+    if c.first_motion_date and add_months(c.marriage_date, r.period["months"]) > c.first_motion_date:
         key = _s14(c, "within_year_with_leave", "within_year_leave_without_ground", "within_year_without_leave")
         yield Hit(key, dict(first_motion=c.first_motion_date, marriage=c.marriage_date),
                   ["marriage_date", "first_motion_date"])
@@ -116,7 +117,7 @@ def second_motion_window(c: CaseFile, r: Rule) -> Iterator[Hit]:
     fm, sm = c.first_motion_date, c.second_motion_date
     if not (fm and sm) or sm < fm:  # a second motion before the first is a consistency defect
         return
-    opens, closes = add_months(fm, 6), add_months(fm, 18)
+    opens, closes = add_months(fm, r.period["opens_months"]), add_months(fm, r.period["closes_months"])
     args = dict(first_motion=fm, second_motion=sm, opens=opens, closes=closes)
     fields = ["first_motion_date", "second_motion_date"]
     if sm < opens:
@@ -128,8 +129,9 @@ def second_motion_window(c: CaseFile, r: Rule) -> Iterator[Hit]:
 
 def waiver_application_timing(c: CaseFile, r: Rule) -> Iterator[Hit]:
     fm, wa = c.first_motion_date, c.waiver_application_date
-    if fm and wa and wa < fm + timedelta(days=7):
-        yield Hit("too_early", dict(applied=wa, opens=fm + timedelta(days=7), first_motion=fm),
+    opens = fm and fm + timedelta(days=r.period["days"])
+    if fm and wa and wa < opens:
+        yield Hit("too_early", dict(applied=wa, opens=opens, first_motion=fm),
                   ["waiver_application_date", "first_motion_date"])
 
 
@@ -232,15 +234,21 @@ def load_rules(jurisdiction: str = "delhi") -> tuple[dict[str, Rule], dict]:
     return rules, local
 
 
-def timeline(c: CaseFile) -> dict[str, date]:
+def timeline(c: CaseFile, rules: dict[str, Rule]) -> dict[str, date]:
+    sep = rules["hma13b.separation_one_year"].period["months"]
+    window = rules["hma13b.second_motion_window"].period
     t = {
-        "earliest_first_motion_without_leave": max(add_months(c.separation_date, 12), add_months(c.marriage_date, 12)),
-        "eighteen_months_of_separation": add_months(c.separation_date, 18),
+        "earliest_first_motion_without_leave": max(
+            add_months(c.separation_date, sep),
+            add_months(c.marriage_date, rules["hma13b.marriage_one_year"].period["months"])),
+        # Amardeep condition (a): the s.13B(2) wait on top of the s.13B(1) year. Key name kept for report readers.
+        "eighteen_months_of_separation": add_months(c.separation_date, sep + window["opens_months"]),
     }
     if c.first_motion_date:
-        t["waiver_application_from"] = c.first_motion_date + timedelta(days=7)
-        t["second_motion_opens"] = add_months(c.first_motion_date, 6)
-        t["second_motion_closes"] = add_months(c.first_motion_date, 18)
+        t["waiver_application_from"] = c.first_motion_date + timedelta(
+            days=rules["hma13b.waiver_application_timing"].period["days"])
+        t["second_motion_opens"] = add_months(c.first_motion_date, window["opens_months"])
+        t["second_motion_closes"] = add_months(c.first_motion_date, window["closes_months"])
     return t
 
 
@@ -272,7 +280,7 @@ def scrutinise(case: CaseFile) -> Report:
         jurisdiction=case.jurisdiction,
         status="DEFECTS_FOUND" if any(f.severity == "defect" for f in findings) else "NO_DEFECTS_FOUND_IN_FILE",
         findings=findings,
-        timeline=timeline(case),
+        timeline=timeline(case, rules),
         unverified_rules=sorted(rid for rid, r in rules.items() if not r.verified),
         not_checked=common["not_checked"],
         disclaimer=common["disclaimer"],

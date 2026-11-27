@@ -2,6 +2,7 @@ id: hma13b.separation_one_year
 citation: Hindu Marriage Act 1955, s.13B(1)
 verified: true
 summary: one year of living separately immediately before the first motion
+period: {months: 12}
 messages:
   short_with_application:
     on_fail: flag_waivable

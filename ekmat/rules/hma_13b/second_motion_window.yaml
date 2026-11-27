@@ -2,6 +2,7 @@ id: hma13b.second_motion_window
 citation: Hindu Marriage Act 1955, s.13B(2)
 verified: true
 summary: second motion not earlier than six months and not later than eighteen months after the first motion
+period: {opens_months: 6, closes_months: 18}
 waiver_route: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
 messages:
   early_with_application:
