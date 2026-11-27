@@ -8,7 +8,7 @@
 
 ## Changing or adding a rule
 
-1. Edit or add the YAML in `ekmat/rules/hma_13b/`. Each rule has an `id`, a `citation`, a `verified` flag, and `messages`, each message with an `on_fail` severity.
+1. Edit or add the YAML in `ekmat/rules/hma_13b/`. Each rule has an `id`, a `citation`, a `verified` flag, a `summary`, and `messages`, each message with an `on_fail` severity. The `summary` is a plain-language label for readers. The engine doesn't read it: the test itself (periods, dates, which facts count) is the rule's check function in `ekmat/engine.py`, so changing what a rule tests means changing that function.
 2. If it's a new rule id, add its check function to `CHECKS` in `ekmat/engine.py`. The engine refuses to start if a rule and a check don't pair up.
 3. Add cases to the `CASES` table in `evals/make_cases.py`. Write the expected findings from the law before you run the engine, then run `python evals/make_cases.py`.
 4. Run `ekmat eval` and `pytest`. Both must pass.

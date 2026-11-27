@@ -1,7 +1,7 @@
 id: hma13b.settlement
 citation: Amardeep Singh v. Harveen Kaur, (2017) 8 SCC 746
 verified: true
-condition: the terms settle alimony, custody and every other pending issue between the parties
+summary: the terms settle alimony, custody and every other pending issue between the parties
 messages:
   maintenance_missing:
     on_fail: warning

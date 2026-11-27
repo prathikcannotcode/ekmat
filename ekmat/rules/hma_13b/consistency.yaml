@@ -1,7 +1,7 @@
 id: hma13b.consistency
 citation: Hindu Marriage Act 1955, s.13B(2)
 verified: true
-condition: the court is satisfied that the marriage was solemnised and the averments in the petition are true
+summary: the court is satisfied that the marriage was solemnised and the averments in the petition are true
 messages:
   separation_before_marriage:
     on_fail: defect

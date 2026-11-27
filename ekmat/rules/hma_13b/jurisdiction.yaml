@@ -8,7 +8,7 @@ note: >-
   respondent, and Ekmat reads s.19(ii) as either spouse's residence. APS v. Nil, 2026 LiveLaw (Mad) 432
   (Madras High Court) is reported to have held that a joint petition filed where the husband lives must be
   entertained. That is persuasive, not binding in Delhi, and its text has not been read.
-condition: the court's district matches the place of marriage, the place the parties last resided together, or a spouse's residence
+summary: the court's district matches the place of marriage, the place the parties last resided together, or a spouse's residence
 messages:
   no_ground:
     on_fail: defect

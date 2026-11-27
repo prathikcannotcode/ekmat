@@ -35,7 +35,7 @@ class Rule(Strict):
     id: str
     citation: str
     verified: bool
-    condition: str
+    summary: str  # a plain-language label; the logic is the check function in CHECKS
     note: str | None = None
     valid_from: date | None = None
     waiver_route: str | None = None

@@ -1,4 +1,4 @@
-"""Writes the 50 synthetic cases and their answer keys.
+"""Writes the 57 synthetic cases and their answer keys.
 
 The answer keys come from the `expect` column below, written by hand from the statute and case law,
 not from running the engine. Every name, date and place is fictional. Run: python evals/make_cases.py

@@ -50,6 +50,19 @@ def test_guard_allows_statutory_language(text):
     assert not RECOMMENDATION.search(text)
 
 
+# Known escapes: a phrase list can't catch paraphrase. M1 is safe because every output sentence is fixed text
+# in the rule files; a model-written draft (M2) needs a different guard. strict: if the guard learns one, move it up.
+@pytest.mark.xfail(strict=True, reason="the phrase guard misses paraphrased recommendations")
+@pytest.mark.parametrize("text", [
+    "The court ought to waive the period.",
+    "A waiver would be appropriate here.",
+    "Nothing stands in the way of a decree.",
+    "The facts favour waiving the wait.",
+])
+def test_guard_misses_paraphrase(text):
+    assert RECOMMENDATION.search(text)
+
+
 def test_rule_text_carries_no_recommendation():
     for path in RULES_DIR.rglob("*.yaml"):
         assert not RECOMMENDATION.search(path.read_text(encoding="utf-8")), path.name

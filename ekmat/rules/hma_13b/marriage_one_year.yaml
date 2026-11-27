@@ -1,7 +1,7 @@
 id: hma13b.marriage_one_year
 citation: Hindu Marriage Act 1955, s.14(1)
 verified: true
-condition: no petition for divorce within one year of the marriage, unless the court gives leave on an application under the proviso
+summary: no petition for divorce within one year of the marriage, unless the court gives leave on an application under the proviso
 messages:
   within_year_with_leave:
     on_fail: flag_requires_leave

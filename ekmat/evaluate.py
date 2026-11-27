@@ -8,7 +8,7 @@ from .engine import load_yaml, scrutinise
 from .models import CaseFile
 from .waiver import build_brief
 
-# Phrases that would turn a scrutiny into a decision. Positive-controlled in tests/test_guard.py.
+# Phrases that would turn a scrutiny into a decision. Positive-controlled in tests/test_ekmat.py.
 RECOMMENDATION = re.compile(
     r"should (not )?be (granted|refused|allowed|dismissed|rejected|waived)"
     r"|\bwe (recommend|advise)|\bis recommended|\brecommend(s|ed)? (that|the|granting|refusing)"

@@ -2,7 +2,7 @@ id: hma13b.documents
 citation: Hindu Marriage Rules 1979 (Delhi High Court), r.4(a), r.8 and Form G
 verified: false
 note: The Delhi rules were read from a secondary reproduction (divorcelawyerindia.com, headed "Delhi High Court Hindu Marriage Rules, 1979", Delhi Gazette No.262/Gazette OSD (R), 16 October 1979), not from the Gazette itself. Registries may ask for more than the rules require.
-condition: the first motion carries the documents the Delhi rules require
+summary: the first motion carries the documents the Delhi rules require
 # Required by the rules: the Form G joint petition, proof of marriage (r.4(a): a certified extract from the
 # Hindu Marriage Register, or an affidavit of the marriage), and each spouse's affidavit of non-collusion (r.8).
 required_documents:
